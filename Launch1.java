@@ -1,5 +1,5 @@
 import java.util.Scanner;
-class Alpha{
+class Alpha extends Thread{
 
     Scanner sc = new Scanner(System.in);
     public void registration()
@@ -12,9 +12,15 @@ class Alpha{
        System.out.println("id: " + id +" age: "+age);
     }
 
+    @Override
+    public void run()
+    {
+        registration();
+    }
+
     
 }
-class Beta
+class Beta extends Thread
 {
     public void courseInfo()
     {
@@ -30,8 +36,13 @@ class Beta
             }
         }
     }
+     @Override 
+        public void run()
+        {
+            courseInfo();
+        }
 }
-class Gamma{
+class Gamma extends Thread{
     public void printingStasr()
     {
         for(int i = 0 ; i < 5 ; i++)
@@ -46,6 +57,11 @@ class Gamma{
             }
         }
     }
+     @Override 
+        public void run()
+        {
+            printingStasr();
+        }
 }
 public class Launch1 {
     public static void main(String[] args) throws InterruptedException{
@@ -66,6 +82,9 @@ public class Launch1 {
         Alpha a = new Alpha();
         Beta b = new Beta();
         Gamma g = new Gamma();
+        a.start();
+        b.start();
+        g.start(); 
         a.registration();
         b.courseInfo();
         g.printingStasr();

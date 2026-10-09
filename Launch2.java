@@ -1,5 +1,6 @@
 import java.util.Scanner;
-class Alpha extends Thread{
+
+class Alpha implements Runnable{
 
     Scanner sc = new Scanner(System.in);
     public void registration()
@@ -12,7 +13,7 @@ class Alpha extends Thread{
        System.out.println("id: " + id +" age: "+age);
     }
 
-    @Override
+
     public void run()
     {
         registration();
@@ -20,7 +21,7 @@ class Alpha extends Thread{
 
     
 }
-class Beta extends Thread
+class Beta implements  Runnable
 {
     public void courseInfo()
     {
@@ -36,13 +37,13 @@ class Beta extends Thread
             }
         }
     }
-     @Override 
-        public void run()
-        {
-            courseInfo();
-        }
+
+    public void run()
+    {
+        courseInfo();
+    }
 }
-class Gamma extends Thread{
+class Gamma implements Runnable{
     public void printingStasr()
     {
         for(int i = 0 ; i < 5 ; i++)
@@ -57,13 +58,12 @@ class Gamma extends Thread{
             }
         }
     }
-     @Override 
-        public void run()
-        {
-            printingStasr();
-        }
+    public void run()
+    {
+        printingStasr();
+    }
 }
-public class Launch1 {
+public class Launch2 {
     public static void main(String[] args) throws InterruptedException{
         // System.out.println("thread started its work");
 
@@ -83,13 +83,16 @@ public class Launch1 {
         Beta b = new Beta();
         Gamma g = new Gamma();
 
+        Thread t1 = new Thread(a);
+        Thread t2 = new Thread(b);
+        Thread t3 = new Thread(g);
 
-        a.start();
-        b.start();
-        g.start(); 
-        a.registration();
-        b.courseInfo();
-        g.printingStasr();
+        t1.start();
+        t2.start();
+        t3.start(); 
+        // a.registration();
+        // b.courseInfo();
+        // g.printingStasr();
 
 
     }
